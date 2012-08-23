@@ -16,11 +16,11 @@
 	
 	<!--Begin strings for Description and saftyTips-->
 	<string name="f1Name">Rebstigen</string>
-	<string name="f1Description">Klatre over FH.</string>
-	<string name="f1Safty">Mindst en hånd og en fod skal have kontakt med FH.\nNedspring foretages fra et af de nederste\ntrin.\nDen maksimale nedsprings højde på\n2 m skal overholdes</string>
+	<string name="f1Description">Klatre over FH</string>
+	<string name="f1Safty">Mindst en hånd og en fod skal have kontakt med FH. Nedspring foretages fra et af de nederste trin. Den maksimale nedsprings højde på 2 m skal overholdes</string>
 	
 	<string name="f2Name">Dobbelt bom</string>
-	<string name="f2Description">Over de to bomme med berøring af jorden mellem dem.</string>
+	<string name="f2Description">Over de to bomme med berøring af jorden mellem dem</string>
 	<string name="f2Safty"></string>
 	
 	<string name="f3Name">Hoptråd</string>
@@ -48,7 +48,7 @@
 	<string name="f8Safty">Tovet må ikke komme mellem benene, og den maksimale nedspringshøjde på 2 m skal overholdes</string>
 	
 	<string name="f9Name">Over/under</string>
-	<string name="f9Description">Over den første bom under den næste osv.</string>
+	<string name="f9Description">Over den første bom under den næste osv</string>
 	<string name="f9Safty">Passagen gennemføres i moderat tempo</string>
 	
 	<string name="f10Name">Irske bænk</string>
@@ -56,20 +56,20 @@
 	<string name="f10Safty"></string>
 	
 	<string name="f11Name">Hundehul</string>
-	<string name="f11Description">Kravle igennem hullet, derefter over første bom og under anden bom, som ved FH nr. 9.</string>
-	<string name="f11Safty">Passagen gennemføres i moderat tempo.</string>
+	<string name="f11Description">Kravle igennem hullet, derefter over første bom og under anden bom, som ved FH nr. 9</string>
+	<string name="f11Safty">Passagen gennemføres i moderat tempo</string>
 	
 	<string name="f12Name">Firebom</string>
 	<string name="f12Description">Over alle fire bomme</string>
 	<string name="f12Safty">Passagen gennemføres i moderat tempo. Den maksimale nedspringshøjde på 2 m skal overholdes</string>
 	
 	<string name="f13Name">Banket med grav</string>
-	<string name="f13Description">Over FH.</string>
+	<string name="f13Description">Over FH</string>
 	<string name="f13Safty"></string>
 	
 	<string name="f14Name">Lille mur</string>
 	<string name="f14Description">Over muren</string>
-	<string name="f14Safty">Passage gennemføres i moderat tempo.</string>
+	<string name="f14Safty">Passage gennemføres i moderat tempo</string>
 	
 	<string name="f15Name">Sukkenes dal</string>
 	<string name="f15Description">Ned og røre jorden og op</string>
