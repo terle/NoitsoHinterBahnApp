@@ -1,0 +1,225 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <FrameLayout
+        android:id="@+id/parentFrameLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/backgroundImageView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/background" >
+        </ImageView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/timerBackground"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/timerbackground"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/timer"
+                    style="@style/timerText"
+                    android:text="@string/timer" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/timerMs"
+                    style="@style/timerText"
+                    android:paddingTop="30sp"
+                    android:text="@string/timerMs"
+                    android:textSize="30sp" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/buttonarea"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/stopButton"
+                    style="@style/buttonText"
+                    android:layout_width="100dip"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/stopbuttonstates"
+                    android:shadowColor="#DF726E"
+                    android:text="@string/stopText"
+                    android:textColor="#7A1100"
+                    android:visibility="gone" >
+                </Button>
+
+                <Button
+                    android:id="@+id/lapButton"
+                    style="@style/buttonText"
+                    android:layout_width="100dip"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/lapbuttonstates"
+                    android:shadowColor="#00A614"
+                    android:text="@string/lapText"
+                    android:textColor="#7A1100"
+                    android:visibility="gone" >
+                </Button>
+
+                <Button
+                    android:id="@+id/startButton"
+                    style="@style/buttonText"
+                    android:layout_width="100dip"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/startbuttonstates"
+                    android:shadowColor="#FBEBC5"
+                    android:text="@string/startText"
+                    android:textColor="#5F3A00" >
+                </Button>
+
+                <Button
+                    android:id="@+id/resetButton"
+                    style="@style/buttonText"
+                    android:layout_width="100dip"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/resetbuttonstates"
+                    android:shadowColor="#959597"
+                    android:text="@string/resetText"
+                    android:textColor="#2E2E2E" >
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/hline" >
+                </ImageView>
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:fillViewport="true" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/nameTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Name" >
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/numberTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Number" >
+                            </TextView>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/requirementsTextView"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Requirements" >
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/safetyTextView"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Safety" >
+                        </TextView>
+
+                        <TextSwitcher
+                            android:id="@+id/numberTextSwitcher"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+                        </TextSwitcher>
+
+                        <TextSwitcher
+                            android:id="@+id/requirementsTextSwitcher"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+                        </TextSwitcher>
+
+                        <TextSwitcher
+                            android:id="@+id/safetyTextSwitcher"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+                        </TextSwitcher>
+
+                        <ImageView
+                            android:id="@+id/obstructionImageView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/f02dobbeltbom1" >
+                        </ImageView>
+
+                        <ImageView
+                            android:id="@+id/obstructionImageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/f02dobbeltbom2" >
+                        </ImageView>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+ 
+        </LinearLayout>
+    </FrameLayout>
+
+<!--     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/sampleText" >
+            </TextView>
+        </LinearLayout>
+    </RelativeLayout>
+ -->
+</RelativeLayout>

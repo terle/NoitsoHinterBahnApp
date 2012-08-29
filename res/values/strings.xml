@@ -1,9 +1,16 @@
 <resources>
 
-    <string name="app_name">Stopwatch</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="hello">Hello world!, StopwatchActivity</string>
+    <string name="app_name">VaerloeseFH</string>
+    <string name="title_section3">Map</string>
+    <string name="title_section2">Stopwatch</string>
+    <string name="title_section1">Users</string>
     <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Noitso Hinterbahn</string>
+
+    <string name="type_user">Type name of new user</string>
+    <string name="save_button">Save user</string>
+    <string name="cancel_button">Cancel</string>
+    
     <string name="title_activity_stopwatch">StopwatchActivity</string>
     <string name="timer">00:00:00</string>
 	<string name="startText">start</string>

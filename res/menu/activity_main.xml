@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/add_users"
+        android:icon="@drawable/ic_action_example"
+        android:showAsAction="ifRoom|withText"
+        android:title="Add user"/>
+    <item
+        android:id="@+id/clear_users"
+        android:icon="@drawable/ic_action_clear_users"
+        android:showAsAction="ifRoom|withText"
+        android:title="Clear users"/>
+</menu>
