@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import dk.noitso.vaerloesefh.R;
 
@@ -36,24 +37,24 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			Bundle savedInstanceState) {		
 		
 		v = inflater.inflate(R.layout.stopwatch_layout, container, false);
-		
-//		Typeface font = Typeface.createFromAsset(context.getAssets(), "altehaasgroteskbold.ttf");
+				
+		Typeface font = Typeface.createFromAsset(context.getAssets(), "altehaasgroteskbold.ttf");
 		timerTextView = (TextView) v.findViewById(R.id.timer);
-//		timerTextView.setTypeface(font);
+		timerTextView.setTypeface(font);
 		timerMsTextView = (TextView) v.findViewById(R.id.timerMs);
-//		timerMsTextView.setTypeface(font);
-//		font = Typeface.createFromAsset(context.getAssets(), "coolvetica.ttf");
+		timerMsTextView.setTypeface(font);
+		font = Typeface.createFromAsset(context.getAssets(), "coolvetica.ttf");
 		startButton = (Button) v.findViewById(R.id.startButton);
-//		startButton.setTypeface(font);
+		startButton.setTypeface(font);
 		startButton.setOnClickListener(this);
 		resetButton = (Button) v.findViewById(R.id.resetButton);
-//		resetButton.setTypeface(font);
+		resetButton.setTypeface(font);
 		resetButton.setOnClickListener(this);
 		stopButton = (Button) v.findViewById(R.id.stopButton);
-//		stopButton.setTypeface(font);
+		stopButton.setTypeface(font);
 		stopButton.setOnClickListener(this);
 		lapButton = (Button) v.findViewById(R.id.lapButton);
-//		lapButton.setTypeface(font);
+		lapButton.setTypeface(font);
 		lapButton.setOnClickListener(this);
 		return v;
 	}

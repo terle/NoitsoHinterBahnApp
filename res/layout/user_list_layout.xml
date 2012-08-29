@@ -2,15 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     android:paddingLeft="8dp"
     android:paddingRight="8dp" >
+
+    <ImageView
+        android:id="@+id/backgroundImageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/background" >
+    </ImageView>
 
     <ListView
         android:id="@id/android:list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
+        android:background="@drawable/background"
         android:drawSelectorOnTop="false" />
 
     <TextView
