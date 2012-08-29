@@ -8,21 +8,21 @@ public class Obstruction {
 	private String safety;
 	private String description;
 	private int number;
-	private List<String> images;
+	private List<Integer> images;
 	
 	public Obstruction(String name, String safety, String description, int number) {
 		this.name = name;
 		this.safety = safety;
 		this.description = description;
 		this.number = number;
-		this.images = new ArrayList<String>();
+		this.images = new ArrayList<Integer>();
 	}
 
-	public void setImages(List<String> images) {
+	public void setImages(List<Integer> images) {
 		this.images = images;
 	}
 	
-	public void addImage(String imageUrl) {
+	public void addImage(int imageUrl) {
 		this.images.add(imageUrl);
 	}
 
@@ -58,7 +58,12 @@ public class Obstruction {
 		this.number = number;
 	}
 
-	public List<String> getImages() {
+	public List<Integer> getImages() {
 		return images;
+	}
+	
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

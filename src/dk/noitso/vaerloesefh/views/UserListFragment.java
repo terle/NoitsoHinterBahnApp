@@ -2,10 +2,15 @@ package dk.noitso.vaerloesefh.views;
 
 import java.util.List;
 
+import noitso.chrono.stopwatch.R;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -34,9 +39,10 @@ public class UserListFragment extends ListFragment {
 		dbHandler = new SqliteHandler(getActivity());
 		list = dbHandler.getUsers();
 		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list);
-		
+		getListView().setBackgroundResource(R.drawable.background);
 		setListAdapter(adapter);
 		registerForContextMenu(getListView());
+		getListView().setDivider(new BitmapDrawable(getActivity().getResources(), BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.hline)));
 	}
 
 	@Override

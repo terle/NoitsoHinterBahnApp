@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class SqliteHandler extends SQLiteOpenHelper {
-	private final static String CREATE_USER_TABLE = "CREATE TABLE users (id INTEGER, name TEXT, PRIMARY KEY (id, name))";
+	private final static String CREATE_USER_TABLE = "CREATE TABLE users (name TEXT, total_time_ms INTEGER, PRIMARY KEY (name))";
 	private final static int DATABASE_VERSION = 1;
 	private final static String DATABASE_NAME = "hinterbahn_db";
 	private final static String TAG = SqliteHandler.class.getSimpleName();
@@ -107,5 +107,14 @@ public class SqliteHandler extends SQLiteOpenHelper {
 		cursor.close();
 		db.close();
 		return userList;
+	}
+
+	public boolean addTimeToUser(String username, int timeInMs) {
+		// TODO - add time.
+		return false;
+	}
+	
+	public List<User> getUsersAndTimes() {
+		return new ArrayList<User>();
 	}
 }

@@ -1,5 +1,6 @@
 package dk.noitso.vaerloesefh;
 
+import noitso.chrono.stopwatch.R;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -15,7 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import dk.noitso.vaerloesefh.data.Settings;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
-import dk.noitso.vaerloesefh.views.MapFragment;
+import dk.noitso.vaerloesefh.views.LeaderBoardFragment;
+import dk.noitso.vaerloesefh.views.ObstructionListFragment;
 import dk.noitso.vaerloesefh.views.StopwatchFragment;
 import dk.noitso.vaerloesefh.views.UserListFragment;
 
@@ -139,26 +141,24 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			case 0:
 				args.putInt(UserListFragment.ARG_SECTION_NUMBER, i);
 				fragment = new UserListFragment();
-				fragment.setArguments(args);
 				break;
 			case 1:
 				fragment = new StopwatchFragment();
-				args.putInt(StopwatchFragment.ARG_SECTION_NUMBER, i);
 				break;
 			case 2:
-				fragment = new MapFragment();
-				args.putInt(MapFragment.ARG_SECTION_NUMBER, i);
+				fragment = new ObstructionListFragment();
 				break;
+			case 3:
+				fragment = new LeaderBoardFragment();
 			default:
 				break;
 			}
-            fragment.setArguments(args);
             return fragment;
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -167,6 +167,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 case 0: return getString(R.string.title_section1).toUpperCase();
                 case 1: return getString(R.string.title_section2).toUpperCase();
                 case 2: return getString(R.string.title_section3).toUpperCase();
+                case 3: return getString(R.string.title_section4).toUpperCase();
             }
             return null;
         }

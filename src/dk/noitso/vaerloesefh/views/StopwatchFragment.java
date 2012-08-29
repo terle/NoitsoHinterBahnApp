@@ -1,6 +1,9 @@
 package dk.noitso.vaerloesefh.views;
 
-import android.content.Context;
+import java.util.ArrayList;
+import java.util.List;
+
+import noitso.chrono.stopwatch.R;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,10 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import dk.noitso.vaerloesefh.R;
+import dk.noitso.vaerloesefh.data.Obstruction;
+import dk.noitso.vaerloesefh.data.ObstructionListCreator;
+import dk.noitso.vaerloesefh.data.Settings;
+import dk.noitso.vaerloesefh.data.SqliteHandler;
 
 public class StopwatchFragment extends Fragment implements OnClickListener {
 	public static final String ARG_SECTION_NUMBER = "section_number";
@@ -26,7 +34,14 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 	private String hours, minutes, seconds, milliseconds;
 	private long secs, mins, hrs, msecs;
 	private boolean stopped = false;
+	private ImageView imageView1, imageView2;
+	private TextView nameNumberTextView, startTimeTextView, endTimeTextView; 
 	private View v;
+	private List<Obstruction> obstructionList;
+	private Spinner nameSpinner;
+	private SqliteHandler dbHandler;
+	
+	private int numberOfLaps = 0;
 	
 	public StopwatchFragment() {
 	}
@@ -34,6 +49,8 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {		
+		
+		dbHandler = new SqliteHandler(getActivity());
 		
 		v = inflater.inflate(R.layout.stopwatch_layout, container, false);
 		Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "altehaasgroteskbold.ttf");
@@ -54,7 +71,28 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 		lapButton = (Button) v.findViewById(R.id.lapButton);
 		lapButton.setTypeface(font);
 		lapButton.setOnClickListener(this);
+		
+		nameSpinner = (Spinner) v.findViewById(R.id.nameSpinner);
+		List<String> userList = dbHandler.getUsers();
+		userList.add(0, "Select a user");
+		nameSpinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, userList));
+		
+		initializeObstructionItems();
 		return v;
+	}
+	
+	private void initializeObstructionItems() {
+		imageView1 = (ImageView) v.findViewById(R.id.obstructionImageView1);
+		imageView2 = (ImageView) v.findViewById(R.id.obstructionImageView2);
+		
+		nameNumberTextView = (TextView) v.findViewById(R.id.nameNumberTextView);
+		startTimeTextView = (TextView) v.findViewById(R.id.startTimeTextView);
+		endTimeTextView = (TextView) v.findViewById(R.id.endTimeTextView);
+		
+		ObstructionListCreator olc = ObstructionListCreator.getInstance(getActivity());
+		obstructionList = olc.getObstructionList();
+		
+		setObstructionToShow(0);
 	}
 
 	private void showStopButton() {
@@ -139,6 +177,32 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 		}
 	};
 
+	private void setObstructionToShow(int obstructionNumber) {
+		imageView1.setVisibility(View.GONE);
+		imageView2.setVisibility(View.GONE);
+		
+		Obstruction obstruction = obstructionList.get(obstructionNumber);
+		if(!obstruction.getImages().isEmpty()) {
+			for(int i = 0; i < obstruction.getImages().size(); i++) {
+				switch (i) {
+				case 0:
+					int imageRes1 = obstruction.getImages().get(i);
+					imageView1.setImageResource(imageRes1);
+					imageView1.setVisibility(View.VISIBLE);
+					break;
+				case 1:
+					int imageRes2 = obstruction.getImages().get(i);
+					imageView2.setImageResource(imageRes2);
+					imageView2.setVisibility(View.VISIBLE);
+					break;
+				default:
+					break;
+				}
+			}	
+		}
+		nameNumberTextView.setText("#" + obstruction.getNumber() + " - " + obstruction.getName());
+	}
+	
 	public void onClick(View v) {
 		switch(v.getId()) {
 		case R.id.startButton:
@@ -162,7 +226,19 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			timerMsTextView.setText(".0");
 			break;
 		case R.id.lapButton:
-			// Set time.
+			numberOfLaps++;
+			if(numberOfLaps >= (Settings.NUMBER_OF_OBSTRUCTIONS * 2)) {
+				// STOP! We've reached the number of obstructions and should be done!
+				break;
+			} else { 
+				if(numberOfLaps % 2 == 0) { // Set endtime.
+					endTimeTextView.setText("End time: " + ((double)elapsedTime/1000) + " ms");
+					setObstructionToShow(numberOfLaps/2);
+					// Change view in a beautiful way... or maybe not ;-) 
+				} else { // Set starttime
+					startTimeTextView.setText("Start time: " + ((double)elapsedTime/1000) + " ms");
+				}
+			}
 			break;
 		default:
 			break;

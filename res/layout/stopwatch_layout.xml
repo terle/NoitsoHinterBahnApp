@@ -21,11 +21,19 @@
             android:layout_height="fill_parent"
             android:orientation="vertical" >
 
+            <Spinner
+                android:id="@+id/nameSpinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/user_array"
+                android:prompt="@string/prompt"
+                android:spinnerMode="dialog" />
+
             <LinearLayout
                 android:id="@+id/timerBackground"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/timerbackground"
                 android:gravity="center"
                 android:orientation="horizontal" >
@@ -49,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/buttonarea"
                 android:gravity="center"
                 android:orientation="horizontal" >
@@ -112,86 +120,97 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/hline" >
                 </ImageView>
 
-                <ScrollView
+                <ViewFlipper
+                    android:id="@+id/details"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:fillViewport="true" >
+                    android:layout_height="fill_parent" >
 
-                    <LinearLayout
+                    <ScrollView
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="vertical" >
+                        android:layout_height="fill_parent"
+                        android:fillViewport="true" >
 
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:orientation="horizontal" >
-
-                            <TextView
-                                android:id="@+id/nameNumberTextView"
-                                android:layout_width="0dip"
-                                android:layout_height="fill_parent"
-                                android:layout_weight="1"
-                                android:text="18 - Name" >
-                            </TextView>
+                            android:orientation="vertical" >
 
                             <LinearLayout
-                                android:layout_width="0dip"
-                                android:layout_height="fill_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:orientation="horizontal" >
 
                                 <TextView
-                                    android:id="@+id/startTimeTextView"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Requirements" >
+                                    android:id="@+id/nameNumberTextView"
+                                    android:layout_width="0dip"
+                                    android:layout_height="fill_parent"
+                                    android:layout_weight="1"
+                                    android:text="18 - Name"
+                                    android:textStyle="bold" >
                                 </TextView>
 
-                                <TextView
-                                    android:id="@+id/endTimeTextView"
-                                    android:layout_width="fill_parent"
+                                <LinearLayout
+                                    android:layout_width="0dip"
+                                    android:layout_height="fill_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical" >
+
+                                    <TextView
+                                        android:id="@+id/startTimeTextView"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Start time: 0.0 ms"
+                                        android:textStyle="bold" >
+                                    </TextView>
+
+                                    <TextView
+                                        android:id="@+id/endTimeTextView"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="End time: 0.0 ms"
+                                        android:textStyle="bold" >
+                                    </TextView>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <ImageView
+                                    android:id="@+id/obstructionImageView1"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Safety" >
-                                </TextView>
+                                    android:layout_weight="1"
+                                    android:visibility="gone" >
+                                </ImageView>
+
+                                <ImageView
+                                    android:id="@+id/obstructionImageView2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:visibility="gone" >
+                                </ImageView>
                             </LinearLayout>
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:orientation="horizontal" >
-
-                            <ImageView
-                                android:id="@+id/obstructionImageView1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:src="@drawable/f02dobbeltbom1" >
-                            </ImageView>
-
-                            <ImageView
-                                android:id="@+id/obstructionImageView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/f02dobbeltbom2" android:layout_weight="1" >
-                            </ImageView>
-                        </LinearLayout>
-                    </LinearLayout>
-                </ScrollView>
+                    </ScrollView>
+                </ViewFlipper>
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 
+    <!-- For commercials! -->
     <!--
-    For commercials!
          <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,7 +1,6 @@
 package dk.noitso.vaerloesefh;
 
-import dk.noitso.vaerloesefh.data.Settings;
-import dk.noitso.vaerloesefh.data.SqliteHandler;
+import noitso.chrono.stopwatch.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import dk.noitso.vaerloesefh.data.Settings;
+import dk.noitso.vaerloesefh.data.SqliteHandler;
 
 public class CreateUserActivity extends Activity implements OnClickListener {
 	private Button saveUserButton, cancelButton;
