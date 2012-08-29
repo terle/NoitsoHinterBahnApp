@@ -16,7 +16,6 @@ import dk.noitso.vaerloesefh.R;
 
 public class StopwatchFragment extends Fragment implements OnClickListener {
 	public static final String ARG_SECTION_NUMBER = "section_number";
-	private Context context;
 	
 	private TextView timerMsTextView, timerTextView; // Temporary TextView
 	private Button lapButton, resetButton, startButton, stopButton; // Temporary Button
@@ -37,13 +36,12 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			Bundle savedInstanceState) {		
 		
 		v = inflater.inflate(R.layout.stopwatch_layout, container, false);
-				
-		Typeface font = Typeface.createFromAsset(context.getAssets(), "altehaasgroteskbold.ttf");
+		Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "altehaasgroteskbold.ttf");
 		timerTextView = (TextView) v.findViewById(R.id.timer);
 		timerTextView.setTypeface(font);
 		timerMsTextView = (TextView) v.findViewById(R.id.timerMs);
 		timerMsTextView.setTypeface(font);
-		font = Typeface.createFromAsset(context.getAssets(), "coolvetica.ttf");
+		font = Typeface.createFromAsset(getActivity().getAssets(), "coolvetica.ttf");
 		startButton = (Button) v.findViewById(R.id.startButton);
 		startButton.setTypeface(font);
 		startButton.setOnClickListener(this);
