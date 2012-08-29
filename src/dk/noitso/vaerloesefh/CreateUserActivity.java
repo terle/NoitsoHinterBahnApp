@@ -43,8 +43,8 @@ public class CreateUserActivity extends Activity implements OnClickListener {
 		super.onResume();
 		dbHandler = new SqliteHandler(this);
 	}
+
 	
-	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.saveUserButton:
