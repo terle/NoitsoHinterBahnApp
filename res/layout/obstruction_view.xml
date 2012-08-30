@@ -90,7 +90,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        style="@style/headLineObstructionView"
+        style="@style/headLine2ObstructionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -110,7 +110,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/headLineObstructionView"
+        style="@style/headLine2ObstructionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
