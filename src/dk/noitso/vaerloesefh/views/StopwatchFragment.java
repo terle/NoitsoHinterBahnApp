@@ -7,21 +7,26 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+import dk.noitso.vaerloesefh.data.Observer;
 import dk.noitso.vaerloesefh.data.Obstruction;
 import dk.noitso.vaerloesefh.data.ObstructionListCreator;
 import dk.noitso.vaerloesefh.data.Settings;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
 
-public class StopwatchFragment extends Fragment implements OnClickListener {
+public class StopwatchFragment extends Fragment implements OnClickListener, OnItemSelectedListener, Observer {
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	
 	private TextView timerMsTextView, timerTextView; // Temporary TextView
@@ -39,8 +44,11 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 	private List<Obstruction> obstructionList;
 	private Spinner nameSpinner;
 	private SqliteHandler dbHandler;
-	
+	private List<String> userList;
+	private ArrayAdapter<String> nameSpinnerAdapter;
 	private int numberOfLaps = 0;
+	private String username = "";
+	private final Handler handler = new Handler();
 	
 	public StopwatchFragment() {
 	}
@@ -74,10 +82,13 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 		finalResetButton.setTypeface(font);
 		finalResetButton.setOnClickListener(this);
 		
+		// Set data for the spinner.
 		nameSpinner = (Spinner) v.findViewById(R.id.nameSpinner);
-		List<String> userList = dbHandler.getUsers();
+		userList = dbHandler.getUsers();
 		userList.add(0, "Select a user");
-		nameSpinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, userList));
+		nameSpinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, userList);
+		nameSpinner.setAdapter(nameSpinnerAdapter);
+		nameSpinner.setOnItemSelectedListener(this);
 		
 		initializeObstructionItems();
 		return v;
@@ -217,6 +228,13 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch(v.getId()) {
 		case R.id.startButton:
+			if(nameSpinner.getSelectedItemPosition() == 0) {
+				Toast.makeText(getActivity(), getActivity().getString(R.string.please_choose_user), Toast.LENGTH_SHORT).show();
+				break;
+			} else {
+				this.username = nameSpinner.getSelectedItem().toString();
+				nameSpinner.setEnabled(false);
+			}
 			showStopButton();
 			if (stopped) {
 				startTime = System.currentTimeMillis() - elapsedTime;
@@ -230,51 +248,95 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			hideStopButton();
 			mHandler.removeCallbacks(startTimer);
 			stopped = true;
+			nameSpinner.setEnabled(true);
 			break;
 		case R.id.resetButton:
 			stopped = false;
-			timerTextView.setText("00:00");
-			timerMsTextView.setText(".0");
-			startTimeTextView.setText("Start time: -:-.-");
-			endTimeTextView.setText("End Time: -:-.-");
-			setObstructionToShow(0);
+			resetViews();
 			break;
 		case R.id.lapButton:
 			numberOfLaps++;
+			// STOP! We've reached the number of obstructions and should be done!
 			if(numberOfLaps >= (Settings.NUMBER_OF_OBSTRUCTIONS * 2)) {
-				// STOP! We've reached the number of obstructions and should be done!
 				mHandler.removeCallbacks(startTimer);
 				stopped = true;
-				endTimeTextView.setText("End time: " +mins+":"+secs+"."+milliseconds) ;
+				endTimeTextView.setText("End time: " + mins + ":" + secs + "." + milliseconds) ;
 				showFinalResetButton();
-				numberOfLaps=0;
-				
+				numberOfLaps = 0;
+				dbHandler.addTimeToUser(this.username, (int)this.elapsedTime);
+				Log.d(StopwatchFragment.class.getSimpleName(), "Total time was: " + elapsedTime);
 				break;
+				// Else more laps
 			} else { 
+				// Laps is an even number so we should set the end time and show next obstacle.
 				if(numberOfLaps % 2 == 0) { // Set endtime.
-					endTimeTextView.setText("End time: " +mins+":"+secs+"."+milliseconds) ;//((double)elapsedTime/1000) + " ms");
-					setObstructionToShow(numberOfLaps/2);
+					endTimeTextView.setText("End time: " + mins + ":" + secs + "." + milliseconds) ;//((double)elapsedTime/1000) + " ms");
 					//Reset timers labels, to show ... nothing at next obstacle
-					startTimeTextView.setText("Start time: -:-.-");
-					endTimeTextView.setText("End Time: -:-.-");
 					//TODO: Make it wait 100 ms before changing view in a beautiful way
-					// TODO:Change view in a beautiful way... or maybe not ;-) 
+					dbHandler.addTimeForObstruction(this.username, (int)elapsedTime, numberOfLaps/2);
+					handler.postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							setObstructionToShow(numberOfLaps/2);
+							startTimeTextView.setText("Start time: -:-.-");
+							endTimeTextView.setText("End Time: -:-.-");
+						}
+					}, Settings.POST_DELAY);
+					// TODO:Change view in a beautiful way... or maybe not ;-)
+					// Lap is an odd number so we should set the start time.
 				} else { // Set starttime
-					startTimeTextView.setText("Start time: " +mins+":"+secs+"."+milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
+					startTimeTextView.setText("Start time: " + mins + ":" + secs + "." + milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
 				}
 			}
 			break;
 		case R.id.finalResetButton:
-			//Everything is set back to start conditions
-			timerTextView.setText("00:00");
-			timerMsTextView.setText(".0");
-			elapsedTime=0;
-			setObstructionToShow(0);
+			elapsedTime = 0;
 			hideStopButton();
+			resetViews();
 		break;
 		
 		default:
 			break;
 		}
+	}
+
+	private void resetViews() {
+		//Everything is set back to start conditions
+		timerTextView.setText("00:00");
+		timerMsTextView.setText(".0");
+		numberOfLaps = 0;
+		setObstructionToShow(0);
+		nameSpinner.setEnabled(true);
+		nameSpinner.setSelection(0);
+		startTimeTextView.setText("Start time: -:-.-");
+		endTimeTextView.setText("End Time: -:-.-");
+		this.username = "";
+	}
+	
+	@Override
+	public void update() {
+		if(nameSpinnerAdapter != null) {
+			nameSpinnerAdapter.clear();
+			userList = dbHandler.getUsers();
+			userList.add(0, "Select a user");
+			for(String name : userList) {
+				nameSpinnerAdapter.add(name);
+			}
+			nameSpinnerAdapter.notifyDataSetChanged();
+		}
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position,
+			long id) {
+		if(position == 0) {
+			resetViews();
+		}
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub
+		
 	}
 }

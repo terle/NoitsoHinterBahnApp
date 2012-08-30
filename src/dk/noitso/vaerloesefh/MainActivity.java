@@ -1,9 +1,15 @@
 package dk.noitso.vaerloesefh;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import noitso.chrono.stopwatch.R;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import dk.noitso.vaerloesefh.data.Observer;
 import dk.noitso.vaerloesefh.data.Settings;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
 import dk.noitso.vaerloesefh.views.LeaderBoardFragment;
@@ -23,6 +30,7 @@ import dk.noitso.vaerloesefh.views.UserListFragment;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 	private SqliteHandler dbHandler;
+	private List<Observer> observers = new ArrayList<Observer>();
 	
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -84,9 +92,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			break;
 		case R.id.clear_users:
 			dbHandler.deleteAllUsers();
-			Intent i = new Intent();
-    		i.setAction("dk.noitso.vaerloesefh.data.Settings.USER_SAVED");
-    		sendBroadcast(i);
+			updateViews();
 			break;
 		default:
 			break;
@@ -111,49 +117,45 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	super.onActivityResult(requestCode, resultCode, data);
-    	if(resultCode == Settings.USER_SAVED){
-    		Intent i = new Intent();
-    		i.setAction("dk.noitso.vaerloesefh.data.Settings.USER_SAVED");
-    		sendBroadcast(i);
-    		Log.d(MainActivity.class.getSimpleName(), "Save was successful!");
-    	}
-    }
     
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the primary
      * sections of the app.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
+    	private UserListFragment userListFragment = new UserListFragment();
+    	private StopwatchFragment stopwatchFragment = new StopwatchFragment();
+    	private ObstructionListFragment obstructionListFragment = new ObstructionListFragment();
+    	private LeaderBoardFragment leaderBoardFragment = new LeaderBoardFragment();
+    	
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+            addFragmentsToObserverList();
         }
-
+        
+        private void addFragmentsToObserverList() {
+        	if(observers != null) {
+        		observers.clear();
+        		observers.add(userListFragment);
+            	observers.add(stopwatchFragment);
+            	observers.add(leaderBoardFragment);
+        	}
+        }
+        
         @Override
         public Fragment getItem(int i) {
-            Fragment fragment = null;
-            Bundle args = new Bundle();
             switch (i) {
 			case 0:
-				args.putInt(UserListFragment.ARG_SECTION_NUMBER, i);
-				fragment = new UserListFragment();
-				break;
+				return userListFragment;
 			case 1:
-				fragment = new StopwatchFragment();
-				break;
+				return stopwatchFragment;
 			case 2:
-				fragment = new ObstructionListFragment();
-				break;
+				return obstructionListFragment;
 			case 3:
-				fragment = new LeaderBoardFragment();
+				return leaderBoardFragment;
 			default:
-				break;
+				return new Fragment();
 			}
-            return fragment;
         }
 
         @Override
@@ -172,4 +174,25 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             return null;
         }
     }
+    
+    @Override
+	public void onResume() {
+		super.onResume();
+		Log.d(MainActivity.class.getSimpleName(), "OnResumse was called!");
+		updateViews();
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		Log.d(MainActivity.class.getSimpleName(), "OnPause was called!");
+	}
+	
+	private void updateViews() {
+		if(observers != null) {
+			for(Observer observer : observers) {
+				observer.update();
+			}
+		}
+	}
 }

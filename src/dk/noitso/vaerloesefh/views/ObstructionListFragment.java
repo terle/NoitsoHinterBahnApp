@@ -47,23 +47,18 @@ public class ObstructionListFragment extends ListFragment {
 			this.list = list;
 		}
 		
-		
-		
 		public int getCount() {
 			return this.list.size();
 		}
 
-		
 		public Obstruction getItem(int position) {
 			return this.list.get(position);
 		}
-
 		
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
 			return 0;
 		}
-
 		
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {

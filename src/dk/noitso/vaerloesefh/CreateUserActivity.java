@@ -2,14 +2,15 @@ package dk.noitso.vaerloesefh;
 
 import noitso.chrono.stopwatch.R;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import dk.noitso.vaerloesefh.data.Settings;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
 
 public class CreateUserActivity extends Activity implements OnClickListener {
@@ -37,6 +38,7 @@ public class CreateUserActivity extends Activity implements OnClickListener {
 	    usernameEditText = (EditText) findViewById(R.id.usernameEditText);
 	    usernameEditText.setText(oldUsername);
 	    errorTextView = (TextView) findViewById(R.id.errorTextView);
+	    errorTextView.setTextColor(Color.RED);
 	}
 
 	@Override
@@ -50,10 +52,15 @@ public class CreateUserActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.saveUserButton:
 			errorTextView.setVisibility(View.GONE);
-			Toast.makeText(this, "Save was clicked...", Toast.LENGTH_SHORT).show();
+			Log.d(CreateUserActivity.class.getSimpleName(), "Save button was clicked...");
+			if(usernameEditText.getText().toString().isEmpty()) {
+				errorTextView.setText("Username can't be empty");
+				errorTextView.setVisibility(View.VISIBLE);
+				break;
+			}
 			if(oldUsername == null) {
 				if(dbHandler.insertUser(usernameEditText.getText().toString())) {
-					setResult(Settings.USER_SAVED);
+					Log.d(CreateUserActivity.class.getSimpleName(), "Adding new user...");
 					finish();
 				} else {
 					errorTextView.setText("Username already taken.");
@@ -61,11 +68,13 @@ public class CreateUserActivity extends Activity implements OnClickListener {
 				}
 			} else {
 				if(dbHandler.editUser(usernameEditText.getText().toString(), oldUsername)) {
-					setResult(Settings.USER_SAVED);
+					Log.d(CreateUserActivity.class.getSimpleName(), "User was updated...");
 					finish();
+				} else {
+					errorTextView.setText("Username already taken.");
+					errorTextView.setVisibility(View.VISIBLE);
 				}
 			}
-			
 			break;
 		case R.id.cancelButton:
 			Toast.makeText(this, "Cancel was clicked...", Toast.LENGTH_SHORT).show();

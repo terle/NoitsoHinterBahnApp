@@ -105,6 +105,7 @@
     <!-- End strings -->
 
 	<string name="prompt">Choose a user</string>
+	<string name="please_choose_user">Please choose a user!</string>
     <string-array name="user_array">
         <item>Bente</item>
         <item>Terkel</item>

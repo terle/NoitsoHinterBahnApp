@@ -123,4 +123,12 @@ public class ObstructionListCreator {
 	public List<Obstruction> getObstructionList() {
 		return obstructionList;
 	}
+	
+	public List<String> getObstructionNames() {
+		List<String> obstructionNamesList = new ArrayList<String>();
+		for(Obstruction obstruction : obstructionList) {
+			obstructionNamesList.add("#" + obstruction.getNumber() + " - " + obstruction.getName());
+		}
+		return obstructionNamesList;
+	}
 }
