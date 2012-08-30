@@ -2,7 +2,7 @@ package dk.noitso.vaerloesefh.data;
 
 public class User {
 	private String name;
-	private int totalTimeInMs;
+	private long totalTimeInMs;
 	
 	public String getName() {
 		return name;
@@ -12,11 +12,11 @@ public class User {
 		this.name = name;
 	}
 	
-	public int getTotalTimeInMs() {
+	public long getTotalTimeInMs() {
 		return totalTimeInMs;
 	}
 	
-	public void setTotalTimeInMs(int totalTimeInMs) {
+	public void setTotalTimeInMs(long totalTimeInMs) {
 		this.totalTimeInMs = totalTimeInMs;
 	}
 }

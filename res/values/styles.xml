@@ -48,8 +48,9 @@
     	<item name="android:shadowDy">1</item>
     	<item name="android:shadowRadius">1</item>
     </style>
+    <!-- TODO: Find better font... perhaps set it to the same as start/reset buttons -->
     <style name="headLineObstructionView">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">23sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#000000</item>
         <item name="android:typeface">monospace</item>
@@ -62,7 +63,7 @@
     <style name="normalTextObstructionView">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">italic</item>
-        <item name="android:textColor">#87CCE4</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:typeface">serif</item>
     </style>
 </resources>
