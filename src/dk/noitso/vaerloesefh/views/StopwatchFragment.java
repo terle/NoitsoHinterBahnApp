@@ -25,7 +25,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	
 	private TextView timerMsTextView, timerTextView; // Temporary TextView
-	private Button lapButton, resetButton, startButton, stopButton; // Temporary Button
+	private Button lapButton, resetButton, startButton, stopButton, finalResetButton; // Temporary Button
 	private Handler mHandler = new Handler();
 	private long startTime;
 	private long elapsedTime;
@@ -70,6 +70,9 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 		lapButton = (Button) v.findViewById(R.id.lapButton);
 		lapButton.setTypeface(font);
 		lapButton.setOnClickListener(this);
+		finalResetButton = (Button) v.findViewById(R.id.finalResetButton);
+		finalResetButton.setTypeface(font);
+		finalResetButton.setOnClickListener(this);
 		
 		nameSpinner = (Spinner) v.findViewById(R.id.nameSpinner);
 		List<String> userList = dbHandler.getUsers();
@@ -99,6 +102,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 		resetButton.setVisibility(View.GONE);
 		stopButton.setVisibility(View.VISIBLE);
 		lapButton.setVisibility(View.VISIBLE);
+		finalResetButton.setVisibility(View.GONE);
 	}
 
 	private void hideStopButton() {
@@ -106,6 +110,15 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 		resetButton.setVisibility(View.VISIBLE);
 		stopButton.setVisibility(View.GONE);
 		lapButton.setVisibility(View.GONE);
+		finalResetButton.setVisibility(View.GONE);
+	}
+	
+	private void showFinalResetButton() {
+		startButton.setVisibility(View.GONE);
+		resetButton.setVisibility(View.GONE);
+		stopButton.setVisibility(View.GONE);
+		lapButton.setVisibility(View.GONE);
+		finalResetButton.setVisibility(View.VISIBLE);
 	}
 
 	private void updateTimer(float time) {
@@ -163,8 +176,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 				milliseconds.length() - 2);
 
 		/* Setting the timer text to the elapsed time */
-		((TextView) v.findViewById(R.id.timer)).setText(hours + ":" + minutes
-				+ ":" + seconds);
+		((TextView) v.findViewById(R.id.timer)).setText(minutes+ ":" + seconds);//setText(hours + ":" + minutes+ ":" + seconds);
 		((TextView) v.findViewById(R.id.timerMs)).setText("." + milliseconds);
 	}
 
@@ -221,24 +233,46 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			break;
 		case R.id.resetButton:
 			stopped = false;
-			timerTextView.setText("00:00:00");
+			timerTextView.setText("00:00");
 			timerMsTextView.setText(".0");
+			startTimeTextView.setText("Start time: -:-.-");
+			endTimeTextView.setText("End Time: -:-.-");
+			setObstructionToShow(0);
 			break;
 		case R.id.lapButton:
 			numberOfLaps++;
 			if(numberOfLaps >= (Settings.NUMBER_OF_OBSTRUCTIONS * 2)) {
 				// STOP! We've reached the number of obstructions and should be done!
+				//TODO: Everything should be reset back to start conditions
+				mHandler.removeCallbacks(startTimer);
+				stopped = true;
+				endTimeTextView.setText("End time: " +mins+":"+secs+"."+milliseconds) ;
+				showFinalResetButton();
+				numberOfLaps=0;
+				
 				break;
 			} else { 
 				if(numberOfLaps % 2 == 0) { // Set endtime.
-					endTimeTextView.setText("End time: " +mins+":"+secs+":"+milliseconds) ;//((double)elapsedTime/1000) + " ms");
+					endTimeTextView.setText("End time: " +mins+":"+secs+"."+milliseconds) ;//((double)elapsedTime/1000) + " ms");
 					setObstructionToShow(numberOfLaps/2);
-					// Change view in a beautiful way... or maybe not ;-) 
+					//Reset timers labels, to show ... nothing at next obstacle
+					startTimeTextView.setText("Start time: -:-.-");
+					endTimeTextView.setText("End Time: -:-.-");
+					//TODO: Make it wait 100 ms before changing view in a beutiful way
+					// TODO:Change view in a beautiful way... or maybe not ;-) 
 				} else { // Set starttime
-					startTimeTextView.setText("Start time: " +mins+":"+secs+":"+milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
+					startTimeTextView.setText("Start time: " +mins+":"+secs+"."+milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
 				}
 			}
 			break;
+		case R.id.finalResetButton:
+			timerTextView.setText("00:00.");
+			timerMsTextView.setText("0");
+			elapsedTime=0;
+			setObstructionToShow(0);
+			hideStopButton();
+		
+		break;
 		default:
 			break;
 		}
