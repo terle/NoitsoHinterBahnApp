@@ -21,6 +21,14 @@
     <string name="lapText">lap</string>
     <string name="description">Beskrivelse</string>
     <string name="safty">Sikkerhed</string>
+    <string name="desriptionLabel">Bla bla bla Beskrivelse</string>
+    <string name="saftyLabel">nææææ sikkerhed. Tak med nej tak</string>
+    <string name="obstacleLabel">#X</string>
+    <string name="obstacleName">Kamelens Gab</string>
+    <string name="noDataAvaliableLabel">Ingen data</string>
+    <string name="timerStartText">Start Time: --:--.-</string>
+    <string name="msTimer00text">.-</string>
+    <string name="timerEndText">End Time: --:--.-</string>
 
     <!-- Begin strings for Description and saftyTips -->
     <string name="f1Name">Rebstigen</string>

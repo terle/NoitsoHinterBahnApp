@@ -163,7 +163,7 @@
                                     android:layout_width="0dip"
                                     android:layout_height="fill_parent"
                                     android:layout_weight="1"
-                                    android:text="18 - Name"
+                                    android:text="@string/obstacleName"
                                     android:textStyle="bold" >
                                 </TextView>
 
@@ -177,7 +177,7 @@
                                         android:id="@+id/startTimeTextView"
                                         android:layout_width="fill_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Start time: 0.0 ms"
+                                        android:text="@string/timerStartText"
                                         android:textStyle="bold" >
                                     </TextView>
 
@@ -185,7 +185,7 @@
                                         android:id="@+id/endTimeTextView"
                                         android:layout_width="fill_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="End time: 0.0 ms"
+                                        android:text="@string/timerEndText"
                                         android:textStyle="bold" >
                                     </TextView>
                                 </LinearLayout>
