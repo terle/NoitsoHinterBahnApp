@@ -20,6 +20,7 @@ import dk.noitso.vaerloesefh.data.Obstruction;
 import dk.noitso.vaerloesefh.data.ObstructionListCreator;
 import dk.noitso.vaerloesefh.data.Settings;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
+import dk.noitso.vaerloesefh.data.User;
 
 public class StopwatchFragment extends Fragment implements OnClickListener {
 	public static final String ARG_SECTION_NUMBER = "section_number";
@@ -39,6 +40,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 	private List<Obstruction> obstructionList;
 	private Spinner nameSpinner;
 	private SqliteHandler dbHandler;
+	private User currentUser;
 	
 	private int numberOfLaps = 0;
 	
@@ -78,7 +80,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 		List<String> userList = dbHandler.getUsers();
 		userList.add(0, "Select a user");
 		nameSpinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, userList));
-		
+				
 		initializeObstructionItems();
 		return v;
 	}
@@ -248,6 +250,10 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 				endTimeTextView.setText("End time: " +mins+":"+secs+"."+milliseconds) ;
 				showFinalResetButton();
 				numberOfLaps=0;
+
+				//Save the laptime for the user
+				currentUser = (User) nameSpinner.getSelectedItem();
+				currentUser.setTotalTimeInMs(elapsedTime);
 				
 				break;
 			} else { 
@@ -270,9 +276,9 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			timerMsTextView.setText(".0");
 			startTimeTextView.setText("Start time: -:-.-");
 			endTimeTextView.setText("End Time: -:-.-");
-			elapsedTime=0;
 			setObstructionToShow(0);
 			hideStopButton();
+			elapsedTime=0;
 		break;
 		
 		default:
