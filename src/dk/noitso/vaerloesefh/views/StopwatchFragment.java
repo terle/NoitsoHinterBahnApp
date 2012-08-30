@@ -1,6 +1,5 @@
 package dk.noitso.vaerloesefh.views;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import noitso.chrono.stopwatch.R;
@@ -232,11 +231,11 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 				break;
 			} else { 
 				if(numberOfLaps % 2 == 0) { // Set endtime.
-					endTimeTextView.setText("End time: " + ((double)elapsedTime/1000) + " ms");
+					endTimeTextView.setText("End time: " +mins+":"+secs+":"+milliseconds) ;//((double)elapsedTime/1000) + " ms");
 					setObstructionToShow(numberOfLaps/2);
 					// Change view in a beautiful way... or maybe not ;-) 
 				} else { // Set starttime
-					startTimeTextView.setText("Start time: " + ((double)elapsedTime/1000) + " ms");
+					startTimeTextView.setText("Start time: " +mins+":"+secs+":"+milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
 				}
 			}
 			break;

@@ -54,23 +54,23 @@ public class LeaderBoardFragment extends ListFragment {
 			this.list.add(user2);
 		}
 		
-		@Override
+		
 		public int getCount() {
 			return this.list.size();
 		}
 
-		@Override
+		
 		public User getItem(int position) {
 			return this.list.get(position);
 		}
 
-		@Override
+		
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
-		@Override
+		
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 	            convertView = LayoutInflater.from(getActivity()).inflate(

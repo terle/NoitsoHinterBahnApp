@@ -12,31 +12,33 @@
         android:layout_marginRight="10dp" >
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="0dp"
+            android:id="@+id/numberTextView"
+            style="@style/headLineObstructionView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Obstruction:"
+            android:text="3"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/nameTextView"
+            style="@style/headLineObstructionView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:text="2"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/numberTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
+        <!-- <TextView -->
+        <!-- android:id="@+id/textView1" -->
+        <!-- android:layout_width="0dp" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_weight="1" -->
+        <!-- android:text="Obstruction:" -->
+        <!-- android:textAppearance="?android:attr/textAppearanceMedium" -->
+        <!-- android:textStyle="bold" /> -->
     </LinearLayout>
 
     <TableLayout
@@ -88,6 +90,7 @@
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/headLineObstructionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -97,24 +100,27 @@
 
     <TextView
         android:id="@+id/descriptionTextView"
+        style="@style/normalTextObstructionView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Description"
+        android:text="@string/description"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/headLineObstructionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="Sikkerhed:"
+        android:text="@string/safty"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/safetyTextView"
+        style="@style/normalTextObstructionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"

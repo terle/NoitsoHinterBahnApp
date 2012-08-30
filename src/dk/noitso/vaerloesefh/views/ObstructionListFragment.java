@@ -48,49 +48,54 @@ public class ObstructionListFragment extends ListFragment {
 		}
 		
 		
-		@Override
+		
 		public int getCount() {
 			return this.list.size();
 		}
 
-		@Override
+		
 		public Obstruction getItem(int position) {
 			return this.list.get(position);
 		}
 
-		@Override
+		
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
-		@Override
+		
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 	            convertView = LayoutInflater.from(getActivity()).inflate(
 	                    R.layout.obstruction_view, null);
 	        }
+			ImageView image1 = (ImageView) convertView.findViewById(R.id.imageView1);
+			image1.setVisibility(View.GONE);
+			ImageView image2 = (ImageView) convertView.findViewById(R.id.imageView2);
+			image2.setVisibility(View.GONE);
+			ImageView image3 = (ImageView) convertView.findViewById(R.id.imageView3);
+			image3.setVisibility(View.GONE);
+			ImageView image4 = (ImageView) convertView.findViewById(R.id.imageView4);
+			image4.setVisibility(View.GONE);
+			
 			
 			List<Integer> imageList = this.list.get(position).getImages();
 				for(int i = 0; i < imageList.size(); i++) {
 					switch (i) {
 					case 0:
-						ImageView image1 = (ImageView) convertView.findViewById(R.id.imageView1);
 						image1.setImageResource(imageList.get(i));
 						image1.setVisibility(View.VISIBLE);
 						break;
 					case 1:
-						ImageView image2 = (ImageView) convertView.findViewById(R.id.imageView2);
 						image2.setImageResource(imageList.get(i));
 						image2.setVisibility(View.VISIBLE);
 						break;
 					case 2:
-						ImageView image3 = (ImageView) convertView.findViewById(R.id.imageView3);
 						image3.setImageResource(imageList.get(i));
 						image3.setVisibility(View.VISIBLE);
 						break;
 					case 3:
-						ImageView image4 = (ImageView) convertView.findViewById(R.id.imageView4);
 						image4.setImageResource(imageList.get(i));
 						image4.setVisibility(View.VISIBLE);
 						break;

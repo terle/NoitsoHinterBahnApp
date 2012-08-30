@@ -13,12 +13,14 @@
     <string name="title_activity_stopwatch">StopwatchActivity</string>
     <string name="timer">00:00:00</string>
     <string name="startText">start</string>
-    <string name="stopText">stop</string>
+    <string name="stopText">pause</string>
     <string name="resetText">reset</string>
     <string name="backgroundText">Stopwatch</string>
     <string name="sampleText">Noitsos HinterBahn tur, Værløse 2012</string>
     <string name="timerMs">.0</string>
     <string name="lapText">lap</string>
+    <string name="description">Beskrivelse</string>
+    <string name="safty">Sikkerhed</string>
 
     <!-- Begin strings for Description and saftyTips -->
     <string name="f1Name">Rebstigen</string>
