@@ -243,7 +243,6 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			numberOfLaps++;
 			if(numberOfLaps >= (Settings.NUMBER_OF_OBSTRUCTIONS * 2)) {
 				// STOP! We've reached the number of obstructions and should be done!
-				//TODO: Everything should be reset back to start conditions
 				mHandler.removeCallbacks(startTimer);
 				stopped = true;
 				endTimeTextView.setText("End time: " +mins+":"+secs+"."+milliseconds) ;
@@ -258,7 +257,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 					//Reset timers labels, to show ... nothing at next obstacle
 					startTimeTextView.setText("Start time: -:-.-");
 					endTimeTextView.setText("End Time: -:-.-");
-					//TODO: Make it wait 100 ms before changing view in a beutiful way
+					//TODO: Make it wait 100 ms before changing view in a beautiful way
 					// TODO:Change view in a beautiful way... or maybe not ;-) 
 				} else { // Set starttime
 					startTimeTextView.setText("Start time: " +mins+":"+secs+"."+milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
@@ -266,13 +265,14 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			}
 			break;
 		case R.id.finalResetButton:
-			timerTextView.setText("00:00.");
-			timerMsTextView.setText("0");
+			//Everything is set back to start conditions
+			timerTextView.setText("00:00");
+			timerMsTextView.setText(".0");
 			elapsedTime=0;
 			setObstructionToShow(0);
 			hideStopButton();
-		
 		break;
+		
 		default:
 			break;
 		}
