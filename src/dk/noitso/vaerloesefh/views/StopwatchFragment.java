@@ -235,8 +235,8 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			stopped = false;
 			timerTextView.setText("00:00");
 			timerMsTextView.setText(".0");
-			startTimeTextView.setText(R.string.timerStartText);
-			endTimeTextView.setText(R.string.timerEndText);
+			startTimeTextView.setText("Start time: -:-.-");
+			endTimeTextView.setText("End Time: -:-.-");
 			setObstructionToShow(0);
 			break;
 		case R.id.lapButton:
@@ -268,6 +268,8 @@ public class StopwatchFragment extends Fragment implements OnClickListener {
 			//Everything is set back to start conditions
 			timerTextView.setText("00:00");
 			timerMsTextView.setText(".0");
+			startTimeTextView.setText("Start time: -:-.-");
+			endTimeTextView.setText("End Time: -:-.-");
 			elapsedTime=0;
 			setObstructionToShow(0);
 			hideStopButton();
