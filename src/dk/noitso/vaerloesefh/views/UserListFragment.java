@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import dk.noitso.vaerloesefh.CreateUserActivity;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
 import dk.noitso.vaerloesefh.data.Observer;
@@ -67,6 +68,8 @@ public class UserListFragment extends ListFragment implements Observer {
 			editUserIntent.putExtra("username", selectedUser);
 			startActivity(editUserIntent);
 			Log.i("FragmentList", "Need to edit user...");
+		} else if(item.getTitle().toString().contains("xml")) {
+			Toast.makeText(getActivity(), "Not implemented yet - coming in the next version!", Toast.LENGTH_SHORT).show();
 		}
 		int menuItemIndex = item.getItemId();
 		Log.i("FragmentList",

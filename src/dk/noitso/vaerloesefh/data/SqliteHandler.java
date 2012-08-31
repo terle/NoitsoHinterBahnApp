@@ -290,34 +290,4 @@ public class SqliteHandler extends SQLiteOpenHelper {
 		db.close();
 		return userList;
 	}
-	
-//	public List<User> getUsersAndObstructionTimes(int obstructionNumber, boolean isForSharingData) {
-//		List<User> userList = new ArrayList<User>();
-//		SQLiteDatabase db = this.getReadableDatabase();
-//		
-//		String whereTimeIsNotZero = "";
-//		if(!isForSharingData) {
-//			whereTimeIsNotZero = " AND time_in_ms > 0";
-//		}
-//		String getTimesAndUsers = "SELECT time_table.*, users.name FROM time_table, users WHERE obstruction_number = " + 
-//				obstructionNumber + whereTimeIsNotZero + " AND fk_user_id = users.id ORDER BY time_in_ms ASC";
-//		Cursor cursor = db.rawQuery(getTimesAndUsers, null);
-//		
-//		cursor.moveToFirst();
-//		
-//		User user = null;
-//		if(cursor.getCount() > 0) {
-//			while(!cursor.isAfterLast()) {
-//				user = new User();
-//				user.setName(cursor.getString(cursor.getColumnIndex("name")));
-//				user.setTotalTimeInMs(cursor.getInt(cursor.getColumnIndex("time_in_ms")));
-//				userList.add(user);
-//				cursor.moveToNext();
-//			}
-//		}
-//		cursor.close();
-//		db.close();
-//		return userList;
-//	}
-	
 }
