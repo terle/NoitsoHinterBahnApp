@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
 
 public class CreateUserActivity extends Activity implements OnClickListener {
@@ -77,7 +76,7 @@ public class CreateUserActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.cancelButton:
-			Toast.makeText(this, "Cancel was clicked...", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(this, "Cancel was clicked...", Toast.LENGTH_SHORT).show();
 			finish();
 			break;
 		default:

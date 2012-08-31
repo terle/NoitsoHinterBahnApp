@@ -25,7 +25,6 @@ import dk.noitso.vaerloesefh.data.Obstruction;
 import dk.noitso.vaerloesefh.data.ObstructionListCreator;
 import dk.noitso.vaerloesefh.data.Settings;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
-import dk.noitso.vaerloesefh.data.User;
 
 public class StopwatchFragment extends Fragment implements OnClickListener, OnItemSelectedListener, Observer {
 	public static final String ARG_SECTION_NUMBER = "section_number";
@@ -314,6 +313,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 		nameSpinner.setSelection(0);
 		startTimeTextView.setText("Start time: --:--.-");
 		endTimeTextView.setText("End Time: --:--.-");
+		elapsedTime = 0;
 		this.username = "";
 	}
 	
@@ -331,9 +331,8 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
-		if(position == 0) {
-			resetViews();
-		}
+		resetViews();
+		nameSpinner.setSelection(position);
 	}
 
 	public void onNothingSelected(AdapterView<?> parent) {
