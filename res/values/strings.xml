@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">VaerloeseFH</string>
+    <string name="app_name">Noitso HinterBahn</string>
     <string name="title_section4">Leaderboard</string>
     <string name="title_section3">Obstructions</string>
     <string name="title_section2">Stopwatch</string>
@@ -29,6 +29,7 @@
     <string name="timerStartText">Start Time: --:--.-</string>
     <string name="msTimer00text">.-</string>
     <string name="timerEndText">End Time: --:--.-</string>
+    <string name="share">Share</string>
 
     <!-- Begin strings for Description and saftyTips -->
     <string name="f1Name">Rebstigen</string>

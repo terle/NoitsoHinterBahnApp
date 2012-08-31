@@ -25,6 +25,7 @@ import dk.noitso.vaerloesefh.data.Obstruction;
 import dk.noitso.vaerloesefh.data.ObstructionListCreator;
 import dk.noitso.vaerloesefh.data.Settings;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
+import dk.noitso.vaerloesefh.data.User;
 
 public class StopwatchFragment extends Fragment implements OnClickListener, OnItemSelectedListener, Observer {
 	public static final String ARG_SECTION_NUMBER = "section_number";
@@ -32,8 +33,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 	private TextView timerMsTextView, timerTextView; // Temporary TextView
 	private Button lapButton, resetButton, startButton, stopButton, finalResetButton; // Temporary Button
 	private Handler mHandler = new Handler();
-	private long startTime;
-	private long elapsedTime;
+	private long startTime,elapsedTime, lapStartTime;
 	private final int REFRESH_RATE = 10;
 	private String hours, minutes, seconds, milliseconds;
 	private long secs, mins, hrs, msecs;
@@ -260,32 +260,36 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 			if(numberOfLaps >= (Settings.NUMBER_OF_OBSTRUCTIONS * 2)) {
 				mHandler.removeCallbacks(startTimer);
 				stopped = true;
-				endTimeTextView.setText("End time: " + mins + ":" + secs + "." + milliseconds) ;
+				endTimeTextView.setText("End time: " + minutes + ":" + seconds + "." + milliseconds) ;
 				showFinalResetButton();
-				numberOfLaps = 0;
 				dbHandler.addTimeToUser(this.username, (int)this.elapsedTime);
 				Log.d(StopwatchFragment.class.getSimpleName(), "Total time was: " + elapsedTime);
+				dbHandler.addTimeForObstruction(this.username, (int)(elapsedTime-lapStartTime), numberOfLaps/2);
+				
+				numberOfLaps = 0;
 				break;
 				// Else more laps
 			} else { 
 				// Laps is an even number so we should set the end time and show next obstacle.
 				if(numberOfLaps % 2 == 0) { // Set endtime.
-					endTimeTextView.setText("End time: " + mins + ":" + secs + "." + milliseconds) ;//((double)elapsedTime/1000) + " ms");
+					
+					endTimeTextView.setText("End time: " + minutes + ":" + seconds + "." + milliseconds) ;//((double)elapsedTime/1000) + " ms");
 					//Reset timers labels, to show ... nothing at next obstacle
 					//TODO: Make it wait 100 ms before changing view in a beautiful way
-					dbHandler.addTimeForObstruction(this.username, (int)elapsedTime, numberOfLaps/2);
+					dbHandler.addTimeForObstruction(this.username, (int)(elapsedTime-lapStartTime), numberOfLaps/2);
 					handler.postDelayed(new Runnable() {
-						@Override
 						public void run() {
 							setObstructionToShow(numberOfLaps/2);
-							startTimeTextView.setText("Start time: -:-.-");
-							endTimeTextView.setText("End Time: -:-.-");
+							startTimeTextView.setText("Start time: --:--.-");
+							endTimeTextView.setText("End Time: --:--.-");
 						}
 					}, Settings.POST_DELAY);
 					// TODO:Change view in a beautiful way... or maybe not ;-)
 					// Lap is an odd number so we should set the start time.
-				} else { // Set starttime
-					startTimeTextView.setText("Start time: " + mins + ":" + secs + "." + milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
+				} else { 
+					// Set starttime
+					lapStartTime = elapsedTime;
+					startTimeTextView.setText("Start time: " + minutes + ":" + seconds + "." + milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
 				}
 			}
 			break;
@@ -308,12 +312,11 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 		setObstructionToShow(0);
 		nameSpinner.setEnabled(true);
 		nameSpinner.setSelection(0);
-		startTimeTextView.setText("Start time: -:-.-");
-		endTimeTextView.setText("End Time: -:-.-");
+		startTimeTextView.setText("Start time: --:--.-");
+		endTimeTextView.setText("End Time: --:--.-");
 		this.username = "";
 	}
 	
-	@Override
 	public void update() {
 		if(nameSpinnerAdapter != null) {
 			nameSpinnerAdapter.clear();
@@ -326,7 +329,6 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 		}
 	}
 
-	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		if(position == 0) {
@@ -334,7 +336,6 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 		}
 	}
 
-	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
 		

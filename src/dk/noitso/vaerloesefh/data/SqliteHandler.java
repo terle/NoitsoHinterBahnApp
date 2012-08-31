@@ -173,6 +173,7 @@ public class SqliteHandler extends SQLiteOpenHelper {
 			ContentValues values = new ContentValues();
 			values.put("time_in_ms", timeInMs);
 			int success = sqlite.update("time_table", values, "fk_user_id=" + userId + " AND obstruction_number=" + obstructionNumber, null);
+			Log.i(TAG, "DataBase was written to");
 			if(success == 0) {
 				throw new SQLiteConstraintException();
 			}
@@ -180,6 +181,7 @@ public class SqliteHandler extends SQLiteOpenHelper {
 			return true;
 		} catch (SQLiteConstraintException sqlerror) { // If we get here, the row is already inserted for the given user. So let's update instead.
 			Log.w(SqliteHandler.class.getSimpleName(), "Couldn't update the timetable... returning false!");
+			Log.e(TAG, sqlerror.getMessage());
 			return false;
 		} catch (Exception e) {
 			// Catching everything else... just in case.
@@ -231,11 +233,16 @@ public class SqliteHandler extends SQLiteOpenHelper {
 		return id;
 	}
 	
-	public List<User> getUsersAndTimes() {
+	public List<User> getUsersAndTimes(boolean isForSharingData) {
 		List<User> userList = new ArrayList<User>();
 		SQLiteDatabase db = this.getReadableDatabase();
 		
-		String getAllUsers = "SELECT * FROM users WHERE total_time_ms > 0 ORDER BY total_time_ms ASC";
+		String whereTimeIsNotZero = "";
+		if(!isForSharingData) {
+			whereTimeIsNotZero = " WHERE total_time_ms > 0";
+		}
+		
+		String getAllUsers = "SELECT * FROM users" + whereTimeIsNotZero + " ORDER BY total_time_ms ASC";
 		Cursor cursor = db.rawQuery(getAllUsers, null);
 		
 		cursor.moveToFirst();
@@ -255,12 +262,16 @@ public class SqliteHandler extends SQLiteOpenHelper {
 		return userList;
 	}
 
-	public List<User> getUsersAndObstructionTimes(int position) {
+	public List<User> getUsersAndObstructionTimes(int obstructionNumber, boolean isForSharingData) {
 		List<User> userList = new ArrayList<User>();
 		SQLiteDatabase db = this.getReadableDatabase();
 		
+		String whereTimeIsNotZero = "";
+		if(!isForSharingData) {
+			whereTimeIsNotZero = " AND time_in_ms > 0";
+		}
 		String getTimesAndUsers = "SELECT time_table.*, users.name FROM time_table, users WHERE obstruction_number = " + 
-				position + " AND fk_user_id = users.id ORDER BY time_in_ms ASC";
+				obstructionNumber + whereTimeIsNotZero + " AND fk_user_id = users.id ORDER BY time_in_ms ASC";
 		Cursor cursor = db.rawQuery(getTimesAndUsers, null);
 		
 		cursor.moveToFirst();
@@ -279,4 +290,34 @@ public class SqliteHandler extends SQLiteOpenHelper {
 		db.close();
 		return userList;
 	}
+	
+//	public List<User> getUsersAndObstructionTimes(int obstructionNumber, boolean isForSharingData) {
+//		List<User> userList = new ArrayList<User>();
+//		SQLiteDatabase db = this.getReadableDatabase();
+//		
+//		String whereTimeIsNotZero = "";
+//		if(!isForSharingData) {
+//			whereTimeIsNotZero = " AND time_in_ms > 0";
+//		}
+//		String getTimesAndUsers = "SELECT time_table.*, users.name FROM time_table, users WHERE obstruction_number = " + 
+//				obstructionNumber + whereTimeIsNotZero + " AND fk_user_id = users.id ORDER BY time_in_ms ASC";
+//		Cursor cursor = db.rawQuery(getTimesAndUsers, null);
+//		
+//		cursor.moveToFirst();
+//		
+//		User user = null;
+//		if(cursor.getCount() > 0) {
+//			while(!cursor.isAfterLast()) {
+//				user = new User();
+//				user.setName(cursor.getString(cursor.getColumnIndex("name")));
+//				user.setTotalTimeInMs(cursor.getInt(cursor.getColumnIndex("time_in_ms")));
+//				userList.add(user);
+//				cursor.moveToNext();
+//			}
+//		}
+//		cursor.close();
+//		db.close();
+//		return userList;
+//	}
+	
 }

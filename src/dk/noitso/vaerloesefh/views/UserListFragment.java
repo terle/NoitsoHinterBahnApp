@@ -79,7 +79,6 @@ public class UserListFragment extends ListFragment implements Observer {
 		Log.i("FragmentList", "Item clicked: " + id);
 	}
 
-	@Override
 	public void update() {
 		if(adapter != null) {
 			list = dbHandler.getUsers();

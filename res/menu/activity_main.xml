@@ -9,4 +9,8 @@
         android:icon="@drawable/ic_action_clear_users"
         android:showAsAction="ifRoom|withText"
         android:title="Clear users"/>
+    <item android:id="@+id/menu_share"
+        android:icon= "@drawable/ic_action_share"
+         android:title="@string/share"
+         android:showAsAction="ifRoom" />
 </menu>

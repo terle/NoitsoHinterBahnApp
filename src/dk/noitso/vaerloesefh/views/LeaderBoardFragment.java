@@ -46,7 +46,7 @@ public class LeaderBoardFragment extends ListFragment implements OnItemSelectedL
 		getListView().addHeaderView(timeSpinner);
 		
 		// Setting the adapter for the list.
-		userList = dbHandler.getUsersAndTimes();
+		userList = dbHandler.getUsersAndTimes(false);
 		adapter = new LeaderBoardAdapter(userList);
 		setListAdapter(adapter);
 				
@@ -107,16 +107,15 @@ public class LeaderBoardFragment extends ListFragment implements OnItemSelectedL
 			TextView nameTextView = (TextView) convertView.findViewById(R.id.nameTextView);
 			nameTextView.setText(this.list.get(position).getName());
 			TextView timeTextView = (TextView) convertView.findViewById(R.id.timeTextView);
-			timeTextView.setText("" + ((double)this.list.get(position).getTotalTimeInMs() / 1000) + " S");
+			timeTextView.setText("" + ((double)this.list.get(position).getTotalTimeInMs() / 1000) + " s");
 			
 			return convertView;
 		}
 	}
 
-	@Override
 	public void update() {
 		if(adapter != null) {
-			userList = dbHandler.getUsersAndTimes();
+			userList = dbHandler.getUsersAndTimes(false);
 			adapter.clear();
 			for(User user : userList) {
 				adapter.add(user);
@@ -125,16 +124,15 @@ public class LeaderBoardFragment extends ListFragment implements OnItemSelectedL
 		}
 	}
 
-	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		List<User> listOfUsersAndTimes = new ArrayList<User>();
 		if(position == 0) {
 			Log.i(LeaderBoardFragment.class.getSimpleName(), "Position is: " + position);
-			listOfUsersAndTimes = dbHandler.getUsersAndTimes();
+			listOfUsersAndTimes = dbHandler.getUsersAndTimes(false);
 		} else {
 			Log.i(LeaderBoardFragment.class.getSimpleName(), "Position is: " + position);
-			listOfUsersAndTimes = dbHandler.getUsersAndObstructionTimes(position);
+			listOfUsersAndTimes = dbHandler.getUsersAndObstructionTimes(position, false);
 		}
 		if(adapter != null) {
 			adapter.clear();
@@ -145,7 +143,6 @@ public class LeaderBoardFragment extends ListFragment implements OnItemSelectedL
 		}
 	}
 
-	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
 	}
