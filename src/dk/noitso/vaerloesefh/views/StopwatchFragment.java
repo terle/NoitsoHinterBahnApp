@@ -3,9 +3,11 @@ package dk.noitso.vaerloesefh.views;
 import java.util.List;
 
 import noitso.chrono.stopwatch.R;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +50,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 	private int numberOfLaps = 0;
 	private String username = "";
 	private final Handler handler = new Handler();
+	private Vibrator vibrator;
 	
 	public StopwatchFragment() {
 	}
@@ -88,6 +91,8 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 		nameSpinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, userList);
 		nameSpinner.setAdapter(nameSpinnerAdapter);
 		nameSpinner.setOnItemSelectedListener(this);
+		
+		vibrator = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 		
 		initializeObstructionItems();
 		return v;
@@ -254,6 +259,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 			resetViews();
 			break;
 		case R.id.lapButton:
+			vibrator.vibrate(50);
 			numberOfLaps++;
 			// STOP! We've reached the number of obstructions and should be done!
 			if(numberOfLaps >= (Settings.NUMBER_OF_OBSTRUCTIONS * 2)) {
@@ -290,6 +296,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 					lapStartTime = elapsedTime;
 					startTimeTextView.setText("Start time: " + minutes + ":" + seconds + "." + milliseconds) ;//+ ((double)elapsedTime/1000) + " ms");
 				}
+			
 			}
 			break;
 		case R.id.finalResetButton:
