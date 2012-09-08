@@ -1,0 +1,127 @@
+<resources>
+<!-- English localizaation -->
+    <string name="app_name">Noitso HinterBahn</string>
+    <string name="title_section4">Leaderboard</string>
+    <string name="title_section3">Obstructions</string>
+    <string name="title_section2">Stopwatch</string>
+    <string name="title_section1">Users</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Noitso Hinterbahn</string>
+    <string name="type_user">Type name of new user</string>
+    <string name="save_button">Save user</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="title_activity_stopwatch">StopwatchActivity</string>
+    <string name="timer">00:00</string>
+    <string name="startText">start</string>
+    <string name="stopText">pause</string>
+    <string name="resetText">reset</string>
+    <string name="backgroundText">Stopwatch</string>
+    <string name="sampleText">Noitsos HinterBahn tur, Værløse 2012</string>
+    <string name="timerMs">.0</string>
+    <string name="lapText">lap</string>
+    <string name="description">Desciption</string>
+    <string name="safty">Safety</string>
+    <string name="desriptionLabel">Bla bla bla Desciption</string>
+    <string name="saftyLabel">oooh, safety, no thank you, I\'m trying to quit</string>
+    <string name="obstacleLabel">#X</string>
+    <string name="obstacleName">The mouth of the Camel</string>
+    <string name="noDataAvaliableLabel">No Data</string>
+    <string name="timerStartText">Start Time: ——:——.—</string>
+    <string name="msTimer00text">.-</string>
+    <string name="timerEndText">End Time: ——:——.—</string>
+    <string name="share">Share</string>
+
+    <!-- Begin strings for Description and saftyTips -->
+    <string name="f1Name">RopeLadder</string>
+    <string name="f1Description">Climpb over obstacle.</string>
+    <string name="f1Safty">At least one hand and one foot must be in contact with OB. Jumping is made from one of the lower steps. The maximum downwards jump height of 2 m must be observed.</string>
+
+    <string name="f2Name">Double Boom</string>
+    <string name="f2Description">Over the two booms with the touch of earth between them.</string>
+    <string name="f2Safty"></string>
+    
+    <string name="f3Name">Jump Thread</string>
+    <string name="f3Description">Jump over the threads.</string>
+    <string name="f3Safty">Passage carried out at a moderate pace.</string>
+    
+    <string name="f4Name">Creeper Thread</string>
+    <string name="f4Description">Creep under the threads.</string>
+    <string name="f4Safty"></string>
+    
+    <string name="f5Name">Ford</string>
+    <string name="f5Description">Pass OB without stepping into the sand.</string>
+    <string name="f5Safty">Passage carried out at a moderate pace.</string>
+    
+    <string name="f6Name">Swedish Ingot</string>
+    <string name="f6Description">Above the upper boom.</string>
+    <string name="f6Safty"></string>
+    
+    <string name="f7Name">Balance Beam</string>
+    <string name="f7Description">Over OB without touching the ground between the two lines before and after OB.</string>
+    <string name="f7Safty">Passage carried out at a moderate pace.</string>
+    
+    <string name="f8Name">Rock Wall</string>
+    <string name="f8Description">Over the wall.</string>
+    <string name="f8Safty">The rope must not come between the legs, and the maximum down jump height of 2 m must be observed.</string>
+    
+    <string name="f9Name">Over/Under</string>
+    <string name="f9Description">Over the first boom in the next, etc.</string>
+    <string name="f9Safty">Passage carried out at a moderate pace.</string>
+    
+    <string name="f10Name">Irish Bench</string>
+    <string name="f10Description">Over the bench.</string>
+    <string name="f10Safty"></string>
+    
+    <string name="f11Name">Dog Hole</string>
+    <string name="f11Description">Crawling through the hole, then the first beam and under the second beam, as at OB No. 9.</string>
+    <string name="f11Safty">Passage carried out at a moderate pace.</string>
+    
+    <string name="f12Name">Four Boom</string>
+    <string name="f12Description">Over all four booms.</string>
+    <string name="f12Safty">Passage carried out at a moderate pace. The maximum down jump height of 2 m must be observed.</string>
+    
+    <string name="f13Name">Banquet with Grave</string>
+    <string name="f13Description">Over OB.</string>
+    <string name="f13Safty"></string>
+    
+    <string name="f14Name">Small Wall</string>
+    <string name="f14Description">Over the wall.</string>
+    <string name="f14Safty">Passage carried out at a moderate pace.</string>
+    
+    <string name="f15Name">Sighs Valley</string>
+    <string name="f15Description">Down and touch the ground and up.</string>
+    <string name="f15Safty"></string>
+    
+    <string name="f16Name">Window Ladder</string>
+    <string name="f16Description">Crawl over OB.</string>
+    <string name="f16Safty">The maximum down jump height of 2 m must be observed.</string>
+    
+    <string name="f17Name">2 Meter Wall</string>
+    <string name="f17Description">Over the wall.</string>
+    <string name="f17Safty"></string>
+    
+    <string name="f18Name">Zig-Zag Boom</string>
+    <string name="f18Description">Not touching the ground between the two lines before and after OB.</string>
+    <string name="f18Safty">Passage carried out at a moderate pace.</string>
+    
+    <string name="f19Name">Labyrinth</string>
+    <string name="f19Description">Follow the passage through the labyrinth.</string>
+    <string name="f19Safty"></string>
+    
+    <string name="f20Name">Three Walls</string>
+    <string name="f20Description">Over the walls.</string>
+    <string name="f20Safty">Passage carried out at a moderate pace.</string>
+    <!-- End strings -->
+
+	<string name="prompt">Choose a user</string>
+	<string name="please_choose_user">Please choose a user!</string>
+    <string-array name="user_array">
+        <item>Bente</item>
+        <item>Terkel</item>
+        <item>Mohamed</item>
+        <item>Kasper</item>
+        <item>Mustafa</item>
+        <item>Ian</item>
+        <item>Kim</item>
+    </string-array>
+</resources>

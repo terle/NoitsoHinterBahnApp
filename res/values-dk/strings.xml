@@ -1,0 +1,128 @@
+<resources>
+<!-- Dansk Localization -->
+    <string name="app_name">Noitso HinterBahn</string>
+    <string name="title_section4">Rangliste</string>
+    <string name="title_section3">Forhindringer</string>
+    <string name="title_section2">Stopur</string>
+    <string name="title_section1">Løbere</string>
+    <string name="menu_settings">Indstillinger</string>
+    <string name="title_activity_main">Noitso Hinterbahn</string>
+    <string name="type_user">Skrive navn på løber</string>
+    <string name="save_button">Gem løber</string>
+    <string name="cancel_button">Annulere</string>
+    <string name="title_activity_stopwatch">StopwatchActivity</string>
+    <string name="timer">00:00</string>
+    <string name="startText">start</string>
+    <string name="stopText">pause</string>
+    <string name="resetText">nulstil</string>
+    <string name="backgroundText">Stopur</string>
+    <string name="sampleText">Noitsos HinterBahn tur, Værløse 2012</string>
+    <string name="timerMs">.0</string>
+    <string name="lapText">lap</string>
+    <string name="description">Beskrivelse</string>
+    <string name="safty">Sikkerhed</string>
+    <string name="desriptionLabel">Bla bla bla Beskrivelse</string>
+    <string name="saftyLabel">nææææ sikkerhed. Tak med nej tak</string>
+    <string name="obstacleLabel">#X</string>
+    <string name="obstacleName">Kamelens Gab</string>
+    <string name="noDataAvaliableLabel">Ingen data</string>
+    <string name="timerStartText">Start Time: ——:——.—</string>
+    <string name="msTimer00text">.-</string>
+    <string name="timerEndText">Slut Time: ——:——.—</string>
+    <string name="share">Del</string>
+
+    <!-- Begin strings for Description and saftyTips -->
+    <string name="f1Name">Rebstigen</string>
+    <string name="f1Description">Klatre over FH</string>
+    <string name="f1Safty">Mindst en hånd og en fod skal have kontakt med FH. Nedspring foretages fra et af de nederste trin. Den maksimale nedsprings højde på 2 m skal overholdes</string>
+    
+    <string name="f2Name">Dobbelt bom</string>
+    <string name="f2Description">Over de to bomme med berøring af jorden mellem dem</string>
+    <string name="f2Safty"></string>
+    
+    <string name="f3Name">Hoptråd</string>
+    <string name="f3Description">Hoppe over trådene</string>
+    <string name="f3Safty">Passagen gennemføres i moderat tempo.</string>
+    
+    <string name="f4Name">Krybetråd</string>
+    <string name="f4Description">Krybe under trådene</string>
+    <string name="f4Safty"></string>
+    
+    <string name="f5Name">Vadested</string>
+    <string name="f5Description">Passere FH uden at træde ned i sandet</string>
+    <string name="f5Safty">Passagen gennemføres i moderat tempo</string>
+    
+    <string name="f6Name">Svensk barre</string>
+    <string name="f6Description">Over den øverste bom</string>
+    <string name="f6Safty"></string>
+    
+    <string name="f7Name">Balancebom</string>
+    <string name="f7Description">Over FH uden at røre jorden mellem de to streger, før og efter FH</string>
+    <string name="f7Safty">Passagen gennemføres i moderat tempo</string>
+    
+    <string name="f8Name">Klippevæg</string>
+    <string name="f8Description">Over væggen</string>
+    <string name="f8Safty">Tovet må ikke komme mellem benene, og den maksimale nedspringshøjde på 2 m skal overholdes</string>
+    
+    <string name="f9Name">Over/under</string>
+    <string name="f9Description">Over den første bom under den næste osv</string>
+    <string name="f9Safty">Passagen gennemføres i moderat tempo</string>
+    
+    <string name="f10Name">Irske bænk</string>
+    <string name="f10Description">Over bænken</string>
+    <string name="f10Safty"></string>
+    
+    <string name="f11Name">Hundehul</string>
+    <string name="f11Description">Kravle igennem hullet, derefter over første bom og under anden bom, som ved FH nr. 9</string>
+    <string name="f11Safty">Passagen gennemføres i moderat tempo</string>
+    
+    <string name="f12Name">Firebom</string>
+    <string name="f12Description">Over alle fire bomme</string>
+    <string name="f12Safty">Passagen gennemføres i moderat tempo. Den maksimale nedspringshøjde på 2 m skal overholdes</string>
+    
+    <string name="f13Name">Banket med grav</string>
+    <string name="f13Description">Over FH</string>
+    <string name="f13Safty"></string>
+    
+    <string name="f14Name">Lille mur</string>
+    <string name="f14Description">Over muren</string>
+    <string name="f14Safty">Passage gennemføres i moderat tempo</string>
+    
+    <string name="f15Name">Sukkenes dal</string>
+    <string name="f15Description">Ned og røre jorden og op</string>
+    <string name="f15Safty"></string>
+    
+    <string name="f16Name">Rudestige</string>
+    <string name="f16Description">Kravle over FH</string>
+    <string name="f16Safty">Den maksimale nedspringshøjde på 2 m skal overholdes</string>
+    
+    <string name="f17Name">2 meter mur</string>
+    <string name="f17Description">Over muren</string>
+    <string name="f17Safty"></string>
+    
+    <string name="f18Name">Zig-zag bom</string>
+    <string name="f18Description">Ikke røre jorden mellem de to streger, før og efter FH</string>
+    <string name="f18Safty">Passagen gennemføres i moderat tempo</string>
+    
+    <string name="f19Name">Labyrint</string>
+    <string name="f19Description">Følg passagen gennem labyrinten</string>
+    <string name="f19Safty"></string>
+    
+    <string name="f20Name">Tre mure</string>
+    <string name="f20Description">Over murene</string>
+    <string name="f20Safty">Passagen gennemføres i moderat tempo</string>
+    <!-- End strings -->
+
+	<string name="prompt">Vælg en løber</string>
+	<string name="please_choose_user">Venligst vælg en løber!</string>
+    <string-array name="user_array">
+        <item>Bente</item>
+        <item>Terkel</item>
+        <item>Mohamed</item>
+        <item>Kasper</item>
+        <item>Mustafa</item>
+        <item>Ian</item>
+        <item>Kim</item>
+    </string-array>
+
+</resources>
