@@ -6,12 +6,10 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.webkit.WebChromeClient.CustomViewCallback;
 
 public class SqliteHandler extends SQLiteOpenHelper {
 	private final static String CREATE_USER_TABLE = "CREATE TABLE users (id INTEGER, name TEXT, total_time_ms INTEGER DEFAULT 0, PRIMARY KEY (id), UNIQUE(name))";
