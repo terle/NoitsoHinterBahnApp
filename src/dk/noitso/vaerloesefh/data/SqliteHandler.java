@@ -63,12 +63,13 @@ public class SqliteHandler extends SQLiteOpenHelper {
 	} 
 	
 	private boolean addUserToTimeTable(String username) {
+		int userId = this.getUserId(username);
+
+		SQLiteDatabase db = this.getWritableDatabase();
 		try {
 			Log.i(SqliteHandler.class.getSimpleName(), "Starting to insert user in timetable...");
 			
-			int userId = this.getUserId(username);
-			SQLiteDatabase db = this.getWritableDatabase();
-			
+			db.beginTransaction();
 			for(int i = 1; i < 21; i++) {
 				ContentValues values = new ContentValues();
 				values.put("fk_user_id", userId);
@@ -76,17 +77,21 @@ public class SqliteHandler extends SQLiteOpenHelper {
 				db.insertOrThrow("time_table", null, values);
 				Log.i(TAG, "Inserted #" + i);
 			}
-			db.close();
-			
+			db.setTransactionSuccessful();			
 			return true;
 		} catch (SQLiteConstraintException sqlerror) {
 			Log.w(SqliteHandler.class.getSimpleName(), "Couldn't insert userdata into timetable... returning false!");
 			Log.e(SqliteHandler.class.getSimpleName(), sqlerror.getMessage());
+			db.close();
 			return false;
 		} catch (Exception e) {
 			// Catching everything else... just in case.
 			e.printStackTrace();
+			db.close();
 			return false;
+		} finally {
+			db.endTransaction();
+			db.close();
 		}
 	}
 	
