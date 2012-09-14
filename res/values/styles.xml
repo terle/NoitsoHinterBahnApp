@@ -25,12 +25,23 @@
     	<item name="android:shadowDy">2</item>
     	<item name="android:shadowRadius">1</item>
     </style>
-    <style name="buttonText">
+    <style name="normalButtonText">
     	<item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">35sp</item>
+        <item name="android:textStyle">bold</item>
+    	<item name="android:shadowDx">0</item>
+    	<item name="android:shadowDy">1</item>
+    	<item name="android:shadowRadius">1</item>
+    </style>
+    <style name="smallButtonText">
+    	<item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     	<item name="android:shadowDx">0</item>
     	<item name="android:shadowDy">1</item>

@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ShareActionProvider;
 import dk.noitso.vaerloesefh.data.Observer;
 import dk.noitso.vaerloesefh.data.Settings;
@@ -188,11 +187,6 @@ public class MainActivity extends FragmentActivity implements
 			}
 		}
 
-		@Override
-		public void destroyItem(View container, int position, Object object) {
-			
-		}
-		
 		@Override
 		public Fragment getItem(int i) {
 			switch (i) {

@@ -64,8 +64,8 @@
 
                 <Button
                     android:id="@+id/stopButton"
-                    style="@style/buttonText"
-                    android:layout_width="100dip"
+                    style="@style/smallButtonText"
+                    android:layout_width="50dip"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/stopbuttonstates"
                     android:shadowColor="#DF726E"
@@ -76,19 +76,19 @@
 
                 <Button
                     android:id="@+id/lapButton"
-                    style="@style/buttonText"
-                    android:layout_width="100dip"
+                    style="@style/normalButtonText"
+                    android:layout_width="150dip"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/lapbuttonstates"
                     android:shadowColor="#00A614"
                     android:text="@string/lapText"
-                    android:textColor="#7A1100"
+                    android:textColor="#1D6519"
                     android:visibility="gone" >
                 </Button>
 
                 <Button
                     android:id="@+id/startButton"
-                    style="@style/buttonText"
+                    style="@style/normalButtonText"
                     android:layout_width="100dip"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/startbuttonstates"
@@ -99,7 +99,7 @@
 
                 <Button
                     android:id="@+id/resetButton"
-                    style="@style/buttonText"
+                    style="@style/normalButtonText"
                     android:layout_width="100dip"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/resetbuttonstates"
@@ -110,7 +110,7 @@
                 
                 <Button
                     android:id="@+id/finalResetButton"
-                    style="@style/buttonText"
+                    style="@style/normalButtonText"
                     android:layout_width="100dip"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/resetbuttonstates"
