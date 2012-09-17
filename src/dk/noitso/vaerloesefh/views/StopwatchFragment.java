@@ -5,6 +5,8 @@ import java.util.List;
 import noitso.chrono.stopwatch.R;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -51,6 +53,8 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 	private String username = "";
 	private final Handler handler = new Handler();
 	private Vibrator vibrator;
+	private SoundPool soundpool;
+	private int startSoundShort, startSoundLong;
 	
 	public StopwatchFragment() {
 	}
@@ -93,6 +97,9 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 		nameSpinner.setOnItemSelectedListener(this);
 		
 		vibrator = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+		soundpool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+		startSoundShort = soundpool.load(this.getActivity(), R.raw.eyeofthetiger_short, 0);
+		startSoundLong = soundpool.load(this.getActivity(), R.raw.eyeofthetiger_long, 0);
 		
 		initializeObstructionItems();
 		return v;
@@ -247,6 +254,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 			}
 			mHandler.removeCallbacks(startTimer);
 			mHandler.postDelayed(startTimer, 0);
+			soundpool.play(startSoundShort, 1.0f, 1.0f, 0, 0, 1.0f);
 			break;
 		case R.id.stopButton:
 			hideStopButton();

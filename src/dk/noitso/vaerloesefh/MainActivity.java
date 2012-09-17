@@ -29,8 +29,7 @@ import dk.noitso.vaerloesefh.views.ObstructionListFragment;
 import dk.noitso.vaerloesefh.views.StopwatchFragment;
 import dk.noitso.vaerloesefh.views.UserListFragment;
 
-public class MainActivity extends FragmentActivity implements
-		ActionBar.TabListener {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener, OnUserSelectedListener {
 	private SqliteHandler dbHandler;
 	private List<Observer> observers = new ArrayList<Observer>();
 	private ShareActionProvider shareActionProvider;
@@ -76,12 +75,12 @@ public class MainActivity extends FragmentActivity implements
 		// reference to the
 		// Tab.
 		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
+		.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int position) {
+				actionBar.setSelectedNavigationItem(position);
+			}
+		});
 
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -107,18 +106,18 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		case R.id.clear_users:
 			new AlertDialog.Builder(this).setTitle("Confirm Delete")
-	        .setMessage("Do you want to clear EVERYTHING?")
-	        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialogInterface, int i) {
-	            	dbHandler.deleteAllUsers();
-	    			updateViews();
-	            }
-	        })
-	        .setNeutralButton("Cancel", null) // don't need to do anything but dismiss here
-	        .create()
-	        .show();
-			
-			
+			.setMessage("Do you want to clear EVERYTHING?")
+			.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialogInterface, int i) {
+					dbHandler.deleteAllUsers();
+					updateViews();
+				}
+			})
+			.setNeutralButton("Cancel", null) // don't need to do anything but dismiss here
+			.create()
+			.show();
+
+
 			break;
 		case R.id.menu_share:
 			Intent intent = new Intent(android.content.Intent.ACTION_SEND);
@@ -254,7 +253,7 @@ public class MainActivity extends FragmentActivity implements
 
 			for (int j =0; j<usersAndTimesList.size();j++) {
 				int time = (int) userAndObstructionTimes.get(j).getTotalTimeInMs();
-				
+
 				usersAndTimesList.get(j).setTimeInArray(i, time);
 			}
 		}
@@ -265,4 +264,10 @@ public class MainActivity extends FragmentActivity implements
 
 		return csv;
 	}
+
+	public void onUserSelected() {
+		mSectionsPagerAdapter.getItem(1);
+		mSectionsPagerAdapter.notifyDataSetChanged();
+		
+	}	
 }

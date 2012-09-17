@@ -3,6 +3,8 @@ package dk.noitso.vaerloesefh.views;
 import java.util.List;
 
 import noitso.chrono.stopwatch.R;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,18 +16,22 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import dk.noitso.vaerloesefh.CreateUserActivity;
+import dk.noitso.vaerloesefh.MainActivity;
+import dk.noitso.vaerloesefh.OnUserSelectedListener;
 import dk.noitso.vaerloesefh.data.SqliteHandler;
 import dk.noitso.vaerloesefh.data.Observer;
 
-public class UserListFragment extends ListFragment implements Observer {
+public class UserListFragment extends ListFragment implements Observer{
 	private ArrayAdapter<String> adapter;
 	private SqliteHandler dbHandler = null;
 	private List<String> list;
 	private String selectedUser = "";
+	private OnUserSelectedListener mListener;
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
 	@Override
@@ -80,7 +86,8 @@ public class UserListFragment extends ListFragment implements Observer {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Log.i("FragmentList", "Item clicked: " + id);
-	}
+		mListener.onUserSelected();
+		}
 
 	public void update() {
 		if(adapter != null) {
@@ -92,4 +99,15 @@ public class UserListFragment extends ListFragment implements Observer {
 			adapter.notifyDataSetChanged();
 		}
 	}
+	
+	@Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnUserSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
+	
 }
