@@ -8,9 +8,9 @@
         android:targetSdkVersion="15" />
 	<uses-permission android:name="android.permission.VIBRATE"/>
     <application
-        
-        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:icon="@drawable/icon_app"
+        
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="dk.noitso.vaerloesefh.MainActivity"
