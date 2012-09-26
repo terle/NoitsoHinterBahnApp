@@ -2,22 +2,19 @@
     package="noitso.chrono.stopwatch"
     android:versionCode="2"
     android:versionName="1.01" >
-
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
 	<uses-permission android:name="android.permission.VIBRATE"/>
     <application
         android:label="@string/app_name"
-        android:icon="@drawable/icon_app"
-        
+        android:icon="@drawable/icon_app"  
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="dk.noitso.vaerloesefh.MainActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,5 +24,4 @@
             android:windowSoftInputMode="stateVisible" >
         </activity>
     </application>
-
 </manifest>
