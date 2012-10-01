@@ -54,7 +54,7 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 	private final Handler handler = new Handler();
 	private Vibrator vibrator;
 	private SoundPool soundpool;
-	private int startSoundShort, startSoundLong;
+	private int startSoundShort;
 	
 	public StopwatchFragment() {
 	}
@@ -99,7 +99,6 @@ public class StopwatchFragment extends Fragment implements OnClickListener, OnIt
 		vibrator = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 		soundpool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 		startSoundShort = soundpool.load(this.getActivity(), R.raw.eyeofthetiger_short, 0);
-		startSoundLong = soundpool.load(this.getActivity(), R.raw.eyeofthetiger_long, 0);
 		
 		initializeObstructionItems();
 		return v;

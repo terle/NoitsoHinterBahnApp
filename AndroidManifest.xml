@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="noitso.chrono.stopwatch"
-    android:versionCode="2"
-    android:versionName="1.01" >
+    android:versionCode="3"
+    android:versionName="0.1.0" >
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
@@ -11,7 +11,7 @@
         android:icon="@drawable/icon_app"  
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name="dk.noitso.vaerloesefh.MainActivity"
+            android:name="dk.noitso.chrono.MainActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="dk.noitso.vaerloesefh.CreateUserActivity"
+            android:name="dk.noitso.chrono.CreateUserActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" >
         </activity>
